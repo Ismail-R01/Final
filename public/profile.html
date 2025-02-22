@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>My Profile</h1>
+    <p><strong>Username:</strong> <span id="username"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+
+    <h2>My Products</h2>
+    <div id="products-container">
+        <p>Loading your products...</p>
+    </div>
+    
+    <button id="logout-btn">Log Out</button>
+    <button id="update-btn">Update Credentials</button>
+    <button onclick="window.location.href='/'">Home</button>
+    <button onclick="window.location.href='/addProduct.html'">Add Product</button>
+    
+    <form id="update-form" style="display: none;">
+        <label for="email">New Email:</label>
+        <input type="email" id="emailNew" placeholder="Enter new email">
+
+        <label for="new-username">New Username:</label>
+        <input type="text" id="new-username" placeholder="Enter new username">
+
+        <button type="submit">Save Changes</button>
+    </form>
+    
+    <script src="profile.js"></script>
+</body>
+</html>
