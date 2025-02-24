@@ -18,8 +18,6 @@ document.getElementById('addProductForm').addEventListener('submit', async funct
         });
         
         const result = await response.json();
-        const textResponse = await response.text();
-        console.log('Raw server response:', textResponse);
 
         if (response.ok) {
             alert('Product added successfully!');
