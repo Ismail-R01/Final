@@ -34,13 +34,19 @@ async function fetchUserProducts() {
             productDiv.classList.add('product');
 
             productDiv.innerHTML = `
-                <img src="${product.imageUrl}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <p class="price">$${product.price}</p>
-                <button class="update-btn" data-id="${product._id}">Update Product</button>
-                <button class="delete-btn" data-id="${product._id}">Delete Product</button>
-            `;
+            <img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100px; height: auto;">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p class="price" style="font-weight: bold; color: green;">$${product.price}</p>
+            <button class="update-btn" data-id="${product._id}" 
+                style="background-color: blue; color: white; padding: 8px; border: none; cursor: pointer; border-radius: 5px;">
+                Update Product
+            </button>
+            <button class="delete-btn" data-id="${product._id}" 
+                style="background-color: red; color: white; padding: 8px; border: none; cursor: pointer; border-radius: 5px;">
+                Delete Product
+            </button>
+        `;
 
             productsContainer.appendChild(productDiv);
         });
@@ -53,12 +59,12 @@ async function fetchUserProducts() {
             });
         });
 
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', async (event) => {
+        document.getElementById('products-container').addEventListener('click', async (event) => {
+            if (event.target.classList.contains('delete-btn')) {
                 const productId = event.target.dataset.id;
                 await deleteProduct(productId);
-                await fetchUserProducts(); // Refresh the product list
-            });
+                await fetchUserProducts(); // Refresh the list
+            }
         });
 
     } catch (error) {
@@ -103,7 +109,7 @@ async function deleteProduct(productId) {
     if (!confirm("Are you sure you want to delete this product?")) return;
 
     try {
-        const response = await fetch(`/api/products/${productId}`, {
+        const response = await fetch(`/products/${productId}`, {
             method: 'DELETE',
             credentials: 'include'
         });

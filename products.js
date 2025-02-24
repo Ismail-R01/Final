@@ -95,5 +95,33 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Delete a product by ID
+router.delete('/:id', isAuthenticated, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const Product = schemas.product;
+
+        // Find the product
+        const product = await Product.findById(id);
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        // Check if the user is the owner of the product
+        if (product.owner.toString() !== req.user.userId) {
+            return res.status(403).json({ message: "Forbidden: You are not the owner of this product" });
+        }
+
+        // Delete the product
+        await Product.findByIdAndDelete(id);
+
+        res.json({ message: "Product deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
 
 module.exports = router;

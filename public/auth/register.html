@@ -9,10 +9,24 @@
         .container { width: 300px; margin: 100px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
         input { width: 100%; padding: 10px; margin: 10px 0; }
         button { width: 100%; padding: 10px; background: blue; color: white; border: none; }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            background: gray;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: fit-content;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
 <div class="container">
+    <button class="back-button" onclick="window.location.href='http://localhost:3000'">&#8592; Home</button>
+
     <h2>Register</h2>
     <form action="/auth/register" method="POST">
         <input type="text" name="username" placeholder="Username" required>
